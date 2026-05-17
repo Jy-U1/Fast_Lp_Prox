@@ -234,6 +234,14 @@ All benchmarked methods returned finite outputs. Accuracy and residual validatio
 
 See [docs/benchmark_a100.md](docs/benchmark_a100.md) for the full A100 benchmark report, including environment details, validation results, figures, and reproduction commands.
 
+## Large-scale CUDA prox scaling
+
+A dedicated CUDA scaling benchmark evaluates the isolated Lp prox evaluator for vector sizes from `n = 10,000` to `n = 10,000,000`.
+
+At `n = 10,000,000` on an NVIDIA A100-SXM4-40GB GPU, the polynomial evaluator reaches approximately 1.87B to 3.00B elements/s across `p in {1/3, 2/5, 3/4}`. The speedup over iterative baselines becomes more pronounced at large vector sizes, reaching about 2.25x over `newton8`, 3.29x over `newton12`, and 9.11x over `bisect40` for `p = 1/3`.
+
+See [docs/prox_scaling_cuda.md](docs/prox_scaling_cuda.md) for the full scaling report.
+
 ---
 
 ## Prox benchmark

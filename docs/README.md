@@ -14,6 +14,8 @@ The main contribution of this project is fast evaluation of nonconvex Lp proxima
 - [Lp-Lasso Forward-Backward CUDA demo](lp_lasso_fb_cuda.md)  
   Application benchmark showing how the Lp prox evaluator can be inserted into a Forward-Backward loop for a synthetic nonconvex Lp-Lasso problem.
 
+- [CUDA prox scaling benchmark](prox_scaling_cuda.md)  
+  Scaling benchmark for isolated Lp prox evaluation from `n = 10,000` to `n = 10,000,000`.
 ---
 
 ## Reproduction workflows
