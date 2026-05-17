@@ -25,6 +25,11 @@ The main contribution of this project is fast evaluation of nonconvex Lp proxima
 
 ---
 
+## API documentation
+
+- [API reference](api_reference.md)  
+  Overview of the main public APIs, including prox evaluators, residual utilities, coefficient utilities, benchmark helpers, and application helpers.
+
 ## Assets
 
 Selected figures used by the reports are stored under:
