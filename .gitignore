@@ -74,3 +74,7 @@ ehthumbs.db
 *_colab.py
 *Colab*.py
 *colab*.py
+
+# Local benchmark artifacts
+docs/artifacts/
+*.zip

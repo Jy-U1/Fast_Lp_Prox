@@ -1,17 +1,31 @@
 # fast-lp-prox
 
-`fast-lp-prox` is a research-oriented Python toolkit for fast evaluation of the nonconvex scalar/vector Lp proximal operator:
+`fast-lp-prox` is a research-oriented Python toolkit for fast evaluation of the nonconvex scalar and vector Lp proximal operator
 
 ```math
 \operatorname{prox}_{\lambda |\cdot|^p}(y)
 =
 \arg\min_x \frac{1}{2}(x-y)^2 + \lambda |x|^p,
-\quad 0 < p < 1.
+\qquad 0 < p < 1.
 ```
 
 For vector inputs, the operator is applied coordinatewise.
 
-The core goal of this project is to provide a reusable, testable, and benchmarkable implementation of the Lp prox operator. Proximal-gradient and Forward-Backward iterations are included as application demos and benchmark workloads, but they are not the main contribution of the package.
+The main goal of this project is to provide reusable, testable, and benchmarkable implementations of Lp proximal operators. Proximal-gradient and Forward-Backward routines are included only as lightweight application helpers and demos; they are not the main contribution of the package.
+
+---
+
+## Highlights
+
+- PyTorch implementation of scalar and vector Lp proximal operators
+- Fixed-control-flow Chebyshev polynomial evaluator for the active branch
+- Newton and bisection baselines for comparison and validation
+- Built-in coefficient tables for selected rational exponents
+- Accuracy validation against high-iteration float64 reference solvers
+- Stationary residual and objective-gap validation
+- CPU and CUDA benchmark scripts
+- Visualization scripts for prox curves, approximation error, runtime, throughput, and validation metrics
+- Lp-Lasso Forward-Backward demo as an application workload
 
 ---
 
@@ -19,18 +33,7 @@ The core goal of this project is to provide a reusable, testable, and benchmarka
 
 This repository is currently an early research prototype.
 
-The current implementation includes:
-
-- PyTorch implementation of the scalar/vector Lp proximal operator
-- Chebyshev polynomial evaluator for the active branch
-- Newton and bisection baseline methods
-- Built-in coefficient tables for selected rational exponents
-- Accuracy validation against a high-iteration float64 Newton reference
-- Stationary residual and objective-gap validation
-- Local CPU benchmark scripts
-- Visualization scripts for prox curves, approximation errors, runtime, throughput, and validation metrics
-- Lp-Lasso Forward-Backward demo and CPU benchmark
-- Proximal-gradient step helper as an application demo
+The implementation is intended for experimentation, benchmarking, and reproducibility. APIs, coefficient tables, benchmark scripts, and documentation may still change.
 
 Benchmark results should be treated as development results unless explicitly marked as official.
 
@@ -45,7 +48,7 @@ For nonconvex Lp regularization with `0 < p < 1`, the scalar proximal operator h
 \quad \text{when } |y| \le \tau_{p,\lambda}.
 ```
 
-For active entries, the nonzero solution is the larger positive root of a scalar nonlinear equation. Traditional implementations may use iterative root solvers such as Newton or bisection.
+For active entries, the nonzero solution is the larger positive root of a scalar nonlinear equation. Traditional implementations often use iterative root solvers such as Newton or bisection.
 
 This project explores an alternative approach:
 
@@ -55,7 +58,7 @@ This project explores an alternative approach:
 
 The intended engineering advantage is that the polynomial evaluator can be more suitable for large batched tensor workloads than repeatedly applying iterative scalar root solvers.
 
-This project does **not** claim that Newton or bisection cannot run on GPUs. They can. The goal is to provide and evaluate a fixed-control-flow polynomial evaluator for the Lp prox operator.
+This project does **not** claim that Newton or bisection cannot run on GPUs. They can. The goal is to provide and benchmark a fixed-control-flow polynomial evaluator for the Lp prox operator.
 
 ---
 
@@ -85,7 +88,7 @@ python -m pytest -q
 
 ---
 
-## Main API
+## Quick start
 
 ### Build a reusable prox evaluator
 
@@ -128,7 +131,7 @@ x = lp_prox(
 
 | Method | Description |
 |---|---|
-| `poly` | Chebyshev polynomial evaluator |
+| `poly` | Chebyshev polynomial evaluator for the active branch |
 | `newton8` | 8-step safeguarded Newton baseline |
 | `newton12` | 12-step safeguarded Newton baseline |
 | `bisect40` | 40-step bisection baseline |
@@ -145,11 +148,11 @@ prox_bisect = make_lp_prox(p=1/3, lam=1.0, method="bisect40")
 
 ---
 
-## Coefficient tables
+## Built-in coefficient tables
 
 The polynomial evaluator uses Chebyshev coefficient tables for selected rational exponents.
 
-Current target cases:
+Currently included target cases:
 
 ```text
 p = 1/3
@@ -162,6 +165,8 @@ Coefficient tables are stored in:
 ```text
 src/fast_lp_prox/coeff_tables/
 ```
+
+When `method="poly"` is used, `make_lp_prox(...)` first tries to load an existing coefficient table. If no suitable table is available, it falls back to building the Chebyshev approximation.
 
 Generate a coefficient table:
 
@@ -203,100 +208,31 @@ python scripts/generate_coeffs.py \
   --verbose
 ```
 
-When `method="poly"` is used, `make_lp_prox(...)` first tries to load an existing coefficient table. If no suitable table is available, it falls back to building the Chebyshev approximation.
-
 ---
 
-## Examples
+## CUDA benchmark snapshot
 
-### Basic usage
+The isolated prox benchmark compares the polynomial evaluator `method="poly"` against iterative reference methods `newton8`, `newton12`, and `bisect40`.
 
-```bash
-python examples/basic_usage.py
-```
-
-This prints Lp prox constants and evaluates the prox operator on a small tensor.
-
-### Compare prox methods
-
-```bash
-python examples/compare_methods.py
-```
-
-This compares the outputs of:
+One CUDA benchmark was run on:
 
 ```text
-poly
-newton8
-newton12
-bisect40
+GPU: NVIDIA A100-SXM4-80GB
+dtype: float32
+n: 1,000,000
+lambda: 1.0
+active_ratio: 0.9
 ```
 
-against a selected reference method.
+| p | poly median time | poly throughput | speedup vs newton8 | speedup vs newton12 | speedup vs bisect40 |
+|---:|---:|---:|---:|---:|---:|
+| 1/3 | 0.663 ms | 1508 M elems/s | 1.87x | 2.64x | 7.25x |
+| 2/5 | 0.663 ms | 1509 M elems/s | 1.90x | 2.63x | 7.29x |
+| 3/4 | 0.928 ms | 1078 M elems/s | 1.32x | 1.86x | 5.14x |
 
----
+All benchmarked methods returned finite outputs. Accuracy and residual validation show float32-level agreement with the reference methods.
 
-## Figures
-
-The repository includes scripts for generating visual explanations of the prox operator.
-
-### Prox curve for one p
-
-```bash
-python scripts/plot_prox_curves.py \
-  --p 1/3 \
-  --output figures/prox_curve_p_1_3.png
-```
-
-This plots:
-
-```math
-y \mapsto \operatorname{prox}_{\lambda |\cdot|^p}(y)
-```
-
-and marks the activation threshold.
-
-Example output:
-
-```text
-figures/prox_curve_p_1_3.png
-```
-
-### Polynomial approximation error
-
-```bash
-python scripts/plot_prox_error.py \
-  --p 1/3 \
-  --output figures/prox_error_p_1_3.png
-```
-
-This compares the polynomial evaluator against a Newton baseline and plots the absolute error.
-
-Example output:
-
-```text
-figures/prox_error_p_1_3.png
-```
-
-### Prox curves for several p values
-
-```bash
-python scripts/plot_p_sweep_curves.py
-```
-
-This generates a comparison plot for:
-
-```text
-p = 1/3
-p = 2/5
-p = 3/4
-```
-
-Example output:
-
-```text
-figures/prox_curves_p_sweep.png
-```
+See [docs/benchmark_a100.md](docs/benchmark_a100.md) for the full A100 benchmark report, including environment details, validation results, figures, and reproduction commands.
 
 ---
 
@@ -325,20 +261,18 @@ python scripts/benchmark_prox.py \
   --output results/prox_benchmark_p_1_3_dev.csv
 ```
 
-A larger CUDA benchmark can be run on a CUDA machine or in Colab:
+Run a CUDA benchmark:
 
 ```bash
 python scripts/benchmark_prox.py \
   --device cuda \
+  --dtype float32 \
   --p 0.3333333333333333 \
-  --n 5000000 \
-  --repeats 40 \
+  --n 1000000 \
+  --methods poly,newton8,newton12,bisect40 \
+  --repeats 30 \
   --warmup 10 \
-  --target-error 2e-7 \
-  --max-degree 128 \
-  --n-fit 8192 \
-  --n-val 80001 \
-  --output results/prox_p_1_3_cuda.csv
+  --output results/prox_benchmark_p_1_3_cuda.csv
 ```
 
 Benchmark outputs include:
@@ -361,11 +295,7 @@ python scripts/validate_accuracy.py \
   --device cpu \
   --p 0.3333333333333333 \
   --n 10000 \
-  --sample-n 2000 \
-  --target-error 2e-7 \
-  --max-degree 128 \
-  --n-fit 8192 \
-  --n-val 80001
+  --sample-n 2000
 ```
 
 Save validation results:
@@ -376,10 +306,6 @@ python scripts/validate_accuracy.py \
   --p 0.3333333333333333 \
   --n 10000 \
   --sample-n 2000 \
-  --target-error 2e-7 \
-  --max-degree 128 \
-  --n-fit 8192 \
-  --n-val 80001 \
   --output results/accuracy_p_1_3_dev.csv
 ```
 
@@ -388,13 +314,11 @@ On CUDA:
 ```bash
 python scripts/validate_accuracy.py \
   --device cuda \
+  --dtype float32 \
   --p 0.3333333333333333 \
-  --n 5000000 \
-  --sample-n 50000 \
-  --target-error 2e-7 \
-  --max-degree 128 \
-  --n-fit 8192 \
-  --n-val 80001 \
+  --n 1000000 \
+  --sample-n 100000 \
+  --methods poly,newton8,newton12,bisect40 \
   --output results/accuracy_p_1_3_cuda.csv
 ```
 
@@ -438,6 +362,19 @@ python scripts/validate_residual.py \
   --n 10000 \
   --sample-n 2000 \
   --output results/residual_p_1_3_dev.csv
+```
+
+On CUDA:
+
+```bash
+python scripts/validate_residual.py \
+  --device cuda \
+  --dtype float32 \
+  --p 0.3333333333333333 \
+  --n 1000000 \
+  --sample-n 100000 \
+  --methods poly,newton8,newton12,bisect40 \
+  --output results/residual_p_1_3_cuda.csv
 ```
 
 Residual validation outputs include:
@@ -487,6 +424,81 @@ results/
 figures/
 ```
 
+These outputs are intended as local artifacts and are ignored by Git.
+
+---
+
+## Visualization examples
+
+### Prox curve for one p
+
+```bash
+python scripts/plot_prox_curves.py \
+  --p 1/3 \
+  --output figures/prox_curve_p_1_3.png
+```
+
+This plots:
+
+```math
+y \mapsto \operatorname{prox}_{\lambda |\cdot|^p}(y)
+```
+
+and marks the activation threshold.
+
+### Polynomial approximation error
+
+```bash
+python scripts/plot_prox_error.py \
+  --p 1/3 \
+  --output figures/prox_error_p_1_3.png
+```
+
+This compares the polynomial evaluator against a Newton baseline and plots the absolute error.
+
+### Prox curves for several p values
+
+```bash
+python scripts/plot_p_sweep_curves.py
+```
+
+This generates a comparison plot for:
+
+```text
+p = 1/3
+p = 2/5
+p = 3/4
+```
+
+---
+
+## Examples
+
+### Basic usage
+
+```bash
+python examples/basic_usage.py
+```
+
+This prints Lp prox constants and evaluates the prox operator on a small tensor.
+
+### Compare prox methods
+
+```bash
+python examples/compare_methods.py
+```
+
+This compares the outputs of:
+
+```text
+poly
+newton8
+newton12
+bisect40
+```
+
+against a selected reference method.
+
 ---
 
 ## Lp-Lasso Forward-Backward demo
@@ -495,7 +507,7 @@ The repository includes an application demo for the nonconvex Lp-Lasso problem:
 
 ```math
 \min_x \frac{1}{2}\|Ax-b\|_2^2 + \lambda \sum_i |x_i|^p,
-\quad 0 < p < 1.
+\qquad 0 < p < 1.
 ```
 
 A Forward-Backward step is:
@@ -545,15 +557,6 @@ Plot the benchmark:
 python scripts/plot_lp_lasso_fb_results.py \
   --input results/lp_lasso_fb_p_1_3_cpu_dev.csv \
   --output-dir figures
-```
-
-This generates figures such as:
-
-```text
-figures/lp_lasso_fb_p_1_3_cpu_dev_runtime_ms.png
-figures/lp_lasso_fb_p_1_3_cpu_dev_ms_per_iter.png
-figures/lp_lasso_fb_p_1_3_cpu_dev_final_objective.png
-figures/lp_lasso_fb_p_1_3_cpu_dev_runtime_ratio_vs_poly.png
 ```
 
 This benchmark measures end-to-end Forward-Backward runtime, including both gradient computation and prox evaluation. For dense design matrices on CPU, matrix multiplication may dominate runtime, so the speedup can be smaller than in isolated prox benchmarks.
@@ -627,11 +630,21 @@ fast-lp-prox/
 │   ├── compare_methods.py
 │   └── lp_lasso_forward_backward_demo.py
 ├── tests/
-├── figures/
-├── results/
+├── docs/
+│   ├── benchmark_a100.md
+│   └── assets/
 ├── pyproject.toml
 └── README.md
 ```
+
+Local benchmark outputs are typically written to:
+
+```text
+results/
+figures/
+```
+
+These directories are ignored by Git.
 
 ---
 
@@ -643,27 +656,27 @@ The current implementation prioritizes clarity and reproducibility over aggressi
 
 Planned future improvements include:
 
-- CUDA benchmark reproduction notebook
-- Colab-based GPU benchmark workflow
+- Colab-based GPU benchmark reproduction notebook
 - Better benchmark summary tables
 - Residual-based certified mode
 - More rational exponent tables
 - Optional Triton backend
 - More complete mathematical documentation
 - Cleaner separation between core prox implementation and application demos
+- Packaging improvements for broader distribution
 
 ---
 
 ## Current limitations
 
 - The project is still a research prototype.
-- Benchmark results depend strongly on hardware, tensor size, dtype, and backend.
+- Benchmark results depend strongly on hardware, tensor size, dtype, backend, and workload shape.
 - Built-in coefficient tables currently focus on a small set of rational exponents.
 - The PyTorch implementation is the current main backend.
 - CPU application benchmarks may be dominated by dense matrix multiplication rather than prox evaluation.
-- CUDA results should be reproduced in a controlled environment before being reported as official results.
+- CUDA benchmark results should be reproduced in a controlled environment before being used as official claims.
 - The mathematical documentation is still under development.
-- The project is not yet prepared for package distribution.
+- The project is not yet prepared for stable package distribution.
 
 ---
 
