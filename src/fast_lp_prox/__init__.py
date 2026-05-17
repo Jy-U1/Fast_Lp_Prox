@@ -1,0 +1,61 @@
+from .constants import LpConstants, lp_constants
+from .coeffs import (
+    ChebyshevApprox,
+    build_cheb_coeffs,
+    candidate_coeff_table_names,
+    cheb_approx_to_dict,
+    dtype_to_name,
+    eval_cheb_on_q,
+    get_or_build_cheb_approx,
+    load_builtin_cheb_approx,
+    load_cheb_approx,
+    p_to_rational_token,
+    save_cheb_approx,
+    z_ref_numpy_vec,
+)
+from .torch_impl import (
+    cheb_eval_torch,
+    lp_prox,
+    make_lp_prox,
+    pow_p_minus_1_torch,
+    pow_p_minus_2_torch,
+)
+
+from .residual import (
+    active_mask,
+    objective_gap_vs_reference,
+    objective_value,
+    prox_stationary_residual,
+    residual_error_bound,
+    summarize_tensor,
+)
+
+__all__ = [
+    "LpConstants",
+    "lp_constants",
+    "ChebyshevApprox",
+    "build_cheb_coeffs",
+    "cheb_approx_to_dict",
+    "eval_cheb_on_q",
+    "load_cheb_approx",
+    "save_cheb_approx",
+    "z_ref_numpy_vec",
+    "cheb_eval_torch",
+    "lp_prox",
+    "make_lp_prox",
+    "pow_p_minus_1_torch",
+    "pow_p_minus_2_torch",
+    "make_pg_step",
+    "pg_step",
+    "candidate_coeff_table_names",
+    "dtype_to_name",
+    "get_or_build_cheb_approx",
+    "load_builtin_cheb_approx",
+    "p_to_rational_token",
+    "active_mask",
+    "objective_gap_vs_reference",
+    "objective_value",
+    "prox_stationary_residual",
+    "residual_error_bound",
+    "summarize_tensor",
+]

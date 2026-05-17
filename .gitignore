@@ -1,0 +1,76 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Build / packaging artifacts
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Local IDE / editor files
+.vscode/
+.idea/
+.DS_Store
+
+# Benchmark and experiment outputs
+results/
+*.csv
+*.tsv
+*.log
+
+# Generated figures
+figures/*.png
+figures/*.pdf
+figures/*.svg
+figures/*.jpg
+figures/*.jpeg
+
+# Keep figures directory if needed
+!figures/.gitkeep
+
+# Large model / tensor / array artifacts
+*.pt
+*.pth
+*.ckpt
+*.npy
+*.npz
+*.pkl
+*.pickle
+
+# Private or immature research materials
+legacy/
+private/
+docs/*.pdf
+docs/*roadmap*
+*roadmap*.pdf
+*roadmap*.tex
+
+# OS temporary files
+Thumbs.db
+ehthumbs.db
+
+# Environment variables / secrets
+.env
+.env.*
+!.env.example
+
+# Colab / notebook exports that should not be committed by accident
+*_colab.py
+*Colab*.py
+*colab*.py
