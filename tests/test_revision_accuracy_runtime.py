@@ -102,3 +102,30 @@ def test_zero_safe_normalized_accuracy():
     assert m["max_norm_error"] == 0
     assert m["support_mismatch_count"] == 0
     assert m["all_finite"]
+
+@pytest.mark.skipif(
+    not torch.cuda.is_available(),
+    reason="CUDA is not available",
+)
+def test_cuda_device_matching():
+    device = torch.device("cuda")
+
+    y = torch.tensor(
+        [0.0, 2.0, 5.0],
+        device=device,
+        dtype=torch.float32,
+    )
+
+    fn = make_preloaded_prox(
+        p=1 / 3,
+        lam=1.0,
+        family="newton",
+        device=device,
+        dtype=torch.float32,
+        work=4,
+    )
+
+    out = fn(y)
+
+    assert out.device == y.device
+    assert torch.isfinite(out).all()
