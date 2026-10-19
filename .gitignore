@@ -78,3 +78,8 @@ ehthumbs.db
 # Local benchmark artifacts
 docs/artifacts/
 *.zip
+
+# Private peer-review materials
+response_to_reviewers.*
+reviewer_comments.*
+review_reports/
