@@ -17,7 +17,9 @@ def rebuild(root: Path) -> tuple[pd.DataFrame, pd.DataFrame]:
     path = root / "threshold_detail.csv"
     if not path.exists():
         raise FileNotFoundError(f"Missing {path}; run threshold experiment first")
-    df = pd.read_csv(path)
+    # ULP-neighbor tests require exact float64 round trips in derived CSVs.
+    # The pandas default C parser can merge adjacent binary64 values.
+    df = pd.read_csv(path, float_precision="round_trip")
     needed = {"p_label", "lambda", "dtype", "family", "configuration", "norm_output_error",
               "support_mismatch", "all_finite", "is_near_threshold", "oracle_side",
               "norm_stationarity_residual", "norm_objective_regret",
