@@ -89,3 +89,6 @@ review_reports/
 
 # Private review and response files
 revision/response_to_reviewers*
+
+# Keep reproducible Phase 1 experiment data
+!/revision/phase1/**/*.csv

@@ -1,0 +1,12 @@
+relative_path,run_class,rows,p,n_timing,repeats,git_commit,device_name,sha256,size_bytes
+data/formal/revision_phase1_A100_p0333_1M.csv,formal,18,0.3333333333333333,1000000,30,7a1e32b,NVIDIA A100-SXM4-40GB,6ff4e81244e130fb23d8e13cbcfcac598e12e8e9c5ff299607c03025eec505eb,10102
+data/formal/revision_phase1_A100_p0400_1M.csv,formal,19,0.4,1000000,30,7a1e32b,NVIDIA A100-SXM4-40GB,b420e663fd56ff5b2cf9a7bebc78728afec848920a7b1d0aae41dc0e527adbae,10358
+data/formal/revision_phase1_A100_p0750_1M.csv,formal,22,0.75,1000000,30,7a1e32b,NVIDIA A100-SXM4-40GB,4362c6b1bdf7986c1060ebfcef51317ae129dbb45ddd7d940d25b987d8d34b57,11935
+data/formal/revision_phase1_A100_p0900_1M.csv,formal,18,0.9,1000000,30,7a1e32b,NVIDIA A100-SXM4-40GB,d3c7559acee8b99dcf6dfad5c5dd543d5ce5b98b8d925fd775af77d263080f13,9812
+data/formal/revision_phase1_A100_p0990_1M.csv,formal,17,0.99,1000000,30,7a1e32b,NVIDIA A100-SXM4-40GB,6396cc277c44d8a251fdbe2edaed95cebc285b4c9f86af10000d94751f13b0af,9455
+data/formal/revision_phase1_A100_p0999_1M.csv,formal,18,0.999,1000000,30,7a1e32b,NVIDIA A100-SXM4-40GB,f002c86154b5fa26a484ca4947943e1594d248c8b99dc079c7ff4dfd13af4c60,9958
+data/pilot/revision_p0990_pilot.csv,pilot,17,0.99,10000,5,7a1e32b,NVIDIA A100-SXM4-40GB,3ad5238316c932869d7d46c8239af7505a0fdbaf0388bfd746dbae9d46450e98,9278
+data/pilot/revision_p0999_pilot.csv,pilot,18,0.999,10000,5,7a1e32b,NVIDIA A100-SXM4-40GB,56b1ba03d0994fb5b2359f9a834f39c8e6e83882f2dd518cf4267dbfc8212241,9819
+data/smoke/revision_phase1_cpu_smoke.csv,smoke,9,0.3333333333333333,1000,2,fbcc975,cpu,5bbd3f6e93d4ebdf2de2a2249fbd2b2eefaf77eff9fbaf2d54479606b89b49e4,5030
+data/smoke/revision_phase1_cuda_smoke.csv,smoke,8,0.3333333333333333,10000,5,7a1e32b,NVIDIA A100-SXM4-40GB,d37ce4ca2c4e73d6e74f9f284b4739e164f174d7a4c5d3be19c93e05590af2c0,4806
+data/smoke/revision_phase1_float32_cpu.csv,smoke,12,0.3333333333333333,10000,10,fbcc975,cpu,f0c746007301158612a23b3c406e3a55d1b52fae6beeac2134f00f3bcd2cb34a,6509
