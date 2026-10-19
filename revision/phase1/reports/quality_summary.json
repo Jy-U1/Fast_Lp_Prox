@@ -1,0 +1,10 @@
+{
+  "complete_formal_files": 6,
+  "formal_configurations": 112,
+  "formal_pass_count": 77,
+  "formal_nonfinite_count": 0,
+  "formal_total_support_mismatches": 0,
+  "max_reference_crosscheck_disagreement": 4.297334739360039e-16,
+  "formal_git_commit": "7a1e32b",
+  "has_all_six_p": true
+}

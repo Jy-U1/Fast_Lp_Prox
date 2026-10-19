@@ -1,0 +1,123 @@
+{
+  "package": "FastLp_Phase1_Experiment_Package",
+  "generated_utc": "2026-10-19T17:41:25Z",
+  "scope": "Phase 1 accuracy-matched scalar prox timing; standalone results archive",
+  "formal_code_commit": "7a1e32b",
+  "original_interactive_notebook_provided": false,
+  "contains_private_review_materials": false,
+  "formal_datasets": 6,
+  "pilot_datasets": 2,
+  "smoke_datasets": 3,
+  "raw_csv_files": [
+    {
+      "relative_path": "data/formal/revision_phase1_A100_p0333_1M.csv",
+      "sha256": "6ff4e81244e130fb23d8e13cbcfcac598e12e8e9c5ff299607c03025eec505eb",
+      "size_bytes": 10102,
+      "rows": 18,
+      "class": "formal",
+      "git_commit": "7a1e32b",
+      "n_timing": 1000000,
+      "p": "0.3333333333333333"
+    },
+    {
+      "relative_path": "data/formal/revision_phase1_A100_p0400_1M.csv",
+      "sha256": "b420e663fd56ff5b2cf9a7bebc78728afec848920a7b1d0aae41dc0e527adbae",
+      "size_bytes": 10358,
+      "rows": 19,
+      "class": "formal",
+      "git_commit": "7a1e32b",
+      "n_timing": 1000000,
+      "p": "0.4"
+    },
+    {
+      "relative_path": "data/formal/revision_phase1_A100_p0750_1M.csv",
+      "sha256": "4362c6b1bdf7986c1060ebfcef51317ae129dbb45ddd7d940d25b987d8d34b57",
+      "size_bytes": 11935,
+      "rows": 22,
+      "class": "formal",
+      "git_commit": "7a1e32b",
+      "n_timing": 1000000,
+      "p": "0.75"
+    },
+    {
+      "relative_path": "data/formal/revision_phase1_A100_p0900_1M.csv",
+      "sha256": "d3c7559acee8b99dcf6dfad5c5dd543d5ce5b98b8d925fd775af77d263080f13",
+      "size_bytes": 9812,
+      "rows": 18,
+      "class": "formal",
+      "git_commit": "7a1e32b",
+      "n_timing": 1000000,
+      "p": "0.9"
+    },
+    {
+      "relative_path": "data/formal/revision_phase1_A100_p0990_1M.csv",
+      "sha256": "6396cc277c44d8a251fdbe2edaed95cebc285b4c9f86af10000d94751f13b0af",
+      "size_bytes": 9455,
+      "rows": 17,
+      "class": "formal",
+      "git_commit": "7a1e32b",
+      "n_timing": 1000000,
+      "p": "0.99"
+    },
+    {
+      "relative_path": "data/formal/revision_phase1_A100_p0999_1M.csv",
+      "sha256": "f002c86154b5fa26a484ca4947943e1594d248c8b99dc079c7ff4dfd13af4c60",
+      "size_bytes": 9958,
+      "rows": 18,
+      "class": "formal",
+      "git_commit": "7a1e32b",
+      "n_timing": 1000000,
+      "p": "0.999"
+    },
+    {
+      "relative_path": "data/pilot/revision_p0990_pilot.csv",
+      "sha256": "3ad5238316c932869d7d46c8239af7505a0fdbaf0388bfd746dbae9d46450e98",
+      "size_bytes": 9278,
+      "rows": 17,
+      "class": "pilot",
+      "git_commit": "7a1e32b",
+      "n_timing": 10000,
+      "p": "0.99"
+    },
+    {
+      "relative_path": "data/pilot/revision_p0999_pilot.csv",
+      "sha256": "56b1ba03d0994fb5b2359f9a834f39c8e6e83882f2dd518cf4267dbfc8212241",
+      "size_bytes": 9819,
+      "rows": 18,
+      "class": "pilot",
+      "git_commit": "7a1e32b",
+      "n_timing": 10000,
+      "p": "0.999"
+    },
+    {
+      "relative_path": "data/smoke/revision_phase1_cpu_smoke.csv",
+      "sha256": "5bbd3f6e93d4ebdf2de2a2249fbd2b2eefaf77eff9fbaf2d54479606b89b49e4",
+      "size_bytes": 5030,
+      "rows": 9,
+      "class": "smoke",
+      "git_commit": "fbcc975",
+      "n_timing": 1000,
+      "p": "0.3333333333333333"
+    },
+    {
+      "relative_path": "data/smoke/revision_phase1_cuda_smoke.csv",
+      "sha256": "d37ce4ca2c4e73d6e74f9f284b4739e164f174d7a4c5d3be19c93e05590af2c0",
+      "size_bytes": 4806,
+      "rows": 8,
+      "class": "smoke",
+      "git_commit": "7a1e32b",
+      "n_timing": 10000,
+      "p": "0.3333333333333333"
+    },
+    {
+      "relative_path": "data/smoke/revision_phase1_float32_cpu.csv",
+      "sha256": "f0c746007301158612a23b3c406e3a55d1b52fae6beeac2134f00f3bcd2cb34a",
+      "size_bytes": 6509,
+      "rows": 12,
+      "class": "smoke",
+      "git_commit": "fbcc975",
+      "n_timing": 10000,
+      "p": "0.3333333333333333"
+    }
+  ]
+}
