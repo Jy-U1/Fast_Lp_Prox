@@ -151,7 +151,7 @@ def make_preloaded_prox(
         raise ValueError("Degree / iteration count must be positive")
 
     def evaluate(y: torch.Tensor) -> torch.Tensor:
-        if y.device != device or y.dtype != dtype:
+        if y.device != rho_tensor.device or y.dtype != dtype:
             raise ValueError("Input dtype and device must match the preloaded evaluator")
         a = torch.abs(y)
         active = a > tau
