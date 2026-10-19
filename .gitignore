@@ -83,3 +83,9 @@ docs/artifacts/
 response_to_reviewers.*
 reviewer_comments.*
 review_reports/
+
+# Local virtual environment backup
+.venv_backup/
+
+# Private review and response files
+revision/response_to_reviewers*
