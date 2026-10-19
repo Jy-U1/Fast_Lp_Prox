@@ -6,7 +6,7 @@ This is a self-contained, **review-free experiment data package** prepared from 
 
 ```text
 FastLp_Phase1_Experiment_Package/
-  notebooks/Phase1_Accuracy_Runtime_A100.ipynb   Clean Colab workflow
+  notebooks/Phase1_Accuracy_Runtime_A100.ipynb   GitHub-first Colab workflow
   data/formal/                                    6 original A100 1M CSVs
   data/pilot/                                     2 original A100 10K CSVs
   data/smoke/                                     3 original CPU/GPU test CSVs
@@ -24,13 +24,19 @@ FastLp_Phase1_Experiment_Package/
   manifest.json                                   Source-file integrity metadata
 ```
 
-## Google Colab workflow
+## Google Colab workflow (GitHub-first)
 
-1. Open `notebooks/Phase1_Accuracy_Runtime_A100.ipynb` in Colab.
-2. Run Section A and **upload this ZIP archive** when prompted.
-3. Run Sections B–D to regenerate the formal comparison tables/plots. **No GPU needed.**
-4. Optionally switch `RUN_BENCHMARKS = True` in Section E, select an A100/CUDA runtime and choose specific `p` values to rerun. These write to `data/rerun/` only.
-5. Run Section F to download an updated ZIP.
+The notebook can be opened directly from the public `revision/major-experiments` branch:
+
+[Open Phase 1 notebook in Google Colab](https://colab.research.google.com/github/Jy-U1/Fast_Lp_Prox/blob/revision/major-experiments/revision/phase1/notebooks/Phase1_Accuracy_Runtime_A100.ipynb)
+
+1. Open the linked notebook and run Section A. The notebook detects a local archive or clones the public GitHub branch automatically. **No ZIP upload or GPU is needed to explore saved data.**
+2. The notebook validates SHA-256 checksums for all 11 raw CSV datasets, copies the archive into a **temporary analysis workspace**, and prints the archive Git commit and recorded benchmark code commit.
+3. Run Sections B–D to regenerate summary tables and PNG/PDF figures from the archived raw CSVs. The Git checkout is not modified.
+4. Optional Section E uses `RUN_BENCHMARKS=True` to rerun selected workloads using the benchmark code pinned to commit `7a1e32b`. Requires a CUDA GPU. New measurements are separate in `data/rerun/`.
+5. Run Section F to download a self-contained ZIP of the workspace and optional reruns.
+
+For offline use, the archived ZIP can still be extracted and the notebook run from the extracted archive root.
 
 ## Local analysis (doesn't re-run the GPU experiment)
 
