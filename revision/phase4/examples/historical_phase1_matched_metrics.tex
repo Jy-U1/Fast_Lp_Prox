@@ -1,0 +1,37 @@
+% Generated from frozen Phase-1 CSV; NOT a new GPU benchmark.
+% Booktabs package required. E_norm selection threshold = 1e-6.
+\begin{table}[t]
+\centering\scriptsize
+\setlength{\tabcolsep}{3pt}
+\caption{Additional methodwise diagnostics for the accuracy-matched Phase-1 scalar benchmark.
+The accuracy target is the maximum sampled normalized output error $10^{-6}$.
+The maximum active stationarity residual uses the units defined by the Phase-1 implementation;
+the reported proximal-objective gap is a sample mean, not a certified uniform bound.
+All listed configurations have zero sampled support disagreements with the reference.
+Original online runtimes are reported elsewhere.}
+\label{tab:phase4-scalar-methodwise}
+\begin{tabular}{@{}lllrrrr@{}}
+\toprule
+$p$ & Backend & Configuration & $\max|\widehat x-x_{\rm ref}|$ & $E_{\rm norm}$ & $\max r_{\rm active}$ & Mean objective gap \\
+\midrule
+$1/3$ & chebyshev & D6 & $1.53\times10^{-6}$ & $2.49\times10^{-7}$ & $1.52\times10^{-6}$ & $1.20\times10^{-13}$ \\
+$1/3$ & newton & K3 & $4.82\times10^{-7}$ & $6.15\times10^{-8}$ & $4.81\times10^{-7}$ & $2.00\times10^{-14}$ \\
+$1/3$ & bisection & K20 & $6.68\times10^{-6}$ & $5.16\times10^{-7}$ & $6.66\times10^{-6}$ & $2.20\times10^{-12}$ \\
+$2/5$ & chebyshev & D6 & $5.10\times10^{-6}$ & $6.29\times10^{-7}$ & $5.07\times10^{-6}$ & $3.90\times10^{-12}$ \\
+$2/5$ & newton & K3 & $4.86\times10^{-7}$ & $5.94\times10^{-8}$ & $4.83\times10^{-7}$ & $2.00\times10^{-14}$ \\
+$2/5$ & bisection & K20 & $6.68\times10^{-6}$ & $5.18\times10^{-7}$ & $6.66\times10^{-6}$ & $2.26\times10^{-12}$ \\
+$3/4$ & chebyshev & D12 & $5.96\times10^{-6}$ & $9.96\times10^{-7}$ & $5.92\times10^{-6}$ & $2.68\times10^{-12}$ \\
+$3/4$ & newton & K4 & $5.10\times10^{-7}$ & $1.06\times10^{-7}$ & $5.06\times10^{-7}$ & $1.85\times10^{-14}$ \\
+$3/4$ & bisection & K20 & $6.71\times10^{-6}$ & $5.53\times10^{-7}$ & $6.67\times10^{-6}$ & $2.31\times10^{-12}$ \\
+$0.9$ & chebyshev & D24 & $1.47\times10^{-6}$ & $3.19\times10^{-7}$ & $1.46\times10^{-6}$ & $4.69\times10^{-14}$ \\
+$0.9$ & newton & K4 & $5.51\times10^{-7}$ & $2.87\times10^{-7}$ & $5.47\times10^{-7}$ & $1.56\times10^{-14}$ \\
+$0.9$ & bisection & K20 & $6.73\times10^{-6}$ & $6.33\times10^{-7}$ & $6.69\times10^{-6}$ & $1.95\times10^{-12}$ \\
+$0.99$ & chebyshev & D54 & $1.80\times10^{-6}$ & $9.05\times10^{-7}$ & $1.80\times10^{-6}$ & $6.34\times10^{-14}$ \\
+$0.99$ & newton & K5 & $5.45\times10^{-7}$ & $2.71\times10^{-7}$ & $5.45\times10^{-7}$ & $1.05\times10^{-14}$ \\
+$0.99$ & bisection & K20 & $5.76\times10^{-6}$ & $6.52\times10^{-7}$ & $5.75\times10^{-6}$ & $1.40\times10^{-12}$ \\
+$0.999$ & chebyshev & D116 & $1.54\times10^{-6}$ & $9.13\times10^{-7}$ & $1.54\times10^{-6}$ & $3.40\times10^{-14}$ \\
+$0.999$ & newton & K4 & $5.54\times10^{-7}$ & $5.50\times10^{-7}$ & $5.47\times10^{-7}$ & $9.08\times10^{-15}$ \\
+$0.999$ & bisection & K20 & $5.72\times10^{-6}$ & $6.28\times10^{-7}$ & $5.72\times10^{-6}$ & $1.30\times10^{-12}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
