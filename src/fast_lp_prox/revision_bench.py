@@ -122,6 +122,23 @@ def prox_bisection_reference_numpy(
     return result
 
 
+def _float32_activation_cutoff(tau: float) -> float:
+    """Largest float32 number <= the float64 activation threshold.
+
+    For finite float32 inputs a, comparing a > this cutoff is equivalent
+    to comparing float64(a) > tau. In particular, it prevents an upward
+    rounding of tau to float32 from incorrectly suppressing the first
+    active float32 grid point. Computed once per evaluator, not per call.
+    """
+    with np.errstate(over="ignore"):
+        rounded = np.float32(tau)
+    if not np.isfinite(rounded):
+        raise OverflowError("Activation threshold exceeds float32 range")
+    if float(rounded) > tau:
+        rounded = np.nextafter(rounded, np.float32(-np.inf))
+    return float(rounded)
+
+
 def make_preloaded_prox(
     *,
     p: float,
@@ -140,6 +157,11 @@ def make_preloaded_prox(
     const = lp_constants(p, lam)
     tau, rho, eps_tau = float(const.tau), float(const.rho), float(const.eps_tau)
     rho_tensor = torch.tensor(rho, device=device, dtype=dtype)
+    # A Python-float RHS of a float32 tensor comparison can be rounded
+    # upward to the nearest float32 number, changing a strict threshold
+    # decision. Choose the floor representable cutoff at setup time.
+    # float64 and other dtypes preserve their previous behavior.
+    active_cutoff = _float32_activation_cutoff(tau) if dtype == torch.float32 else tau
     poly_coeffs = None
     if family == "chebyshev":
         if coefficients is None or len(coefficients) != work + 1:
@@ -154,7 +176,7 @@ def make_preloaded_prox(
         if y.device != rho_tensor.device or y.dtype != dtype:
             raise ValueError("Input dtype and device must match the preloaded evaluator")
         a = torch.abs(y)
-        active = a > tau
+        active = a > active_cutoff
         if family == "chebyshev":
             a_safe = torch.clamp(a, min=tau)
             eps = lam * p * pow_p_minus_2_torch(a_safe, p)

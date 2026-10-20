@@ -20,6 +20,8 @@ from typing import Optional
 import numpy as np
 import torch
 
+from revision.phase5.threshold_consistency import strict_activation_mask
+
 
 @dataclass(frozen=True)
 class ProxConstants:
@@ -111,7 +113,7 @@ def fixed_term_series(y: torch.Tensor, *, p: float, lam: float,
     t = _t_normalized(yabs, c)
     z = _eval_series_z(t, coeff)
     candidate = torch.sign(y) * yabs * z
-    return torch.where(yabs > c.tau, candidate, torch.zeros_like(y))
+    return torch.where(strict_activation_mask(yabs, c.tau), candidate, torch.zeros_like(y))
 
 
 class FixedSeries:
