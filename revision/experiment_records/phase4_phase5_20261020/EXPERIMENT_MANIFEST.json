@@ -1,0 +1,83 @@
+{
+  "record_id": "fastlp_phase4_phase5_public_experiment_record_20261020",
+  "record_date_utc": "2026-10-20",
+  "repository": "https://github.com/Jy-U1/Fast_Lp_Prox",
+  "code_branch_at_capture": "revision/major-experiments",
+  "phase4_lasso_source_commit": "2dec97b158f8f4d935616ee1842ca5f5f8ebff5d",
+  "phase5_scalar_source_commit": "acdef3f2902cdb67ab07006647a97dbe41f56601",
+  "phase4": {
+    "experiment": "FB Lasso",
+    "p": [
+      0.3333333333333333,
+      0.75,
+      0.9
+    ],
+    "problem_sizes_mn": [
+      [
+        1000,
+        2000
+      ],
+      [
+        2000,
+        4000
+      ]
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "backends": [
+      "chebyshev",
+      "newton",
+      "bisection"
+    ],
+    "stopping_tolerance": 1e-06,
+    "output_method_seed_rows": 54,
+    "stop_checks_passed": 54,
+    "replay_checks_passed": 54,
+    "timing_platform": "NVIDIA A100-SXM4-40GB"
+  },
+  "phase5": {
+    "experiment": "scalar proximity benchmark",
+    "p": [
+      "1/3",
+      "2/5",
+      "3/4",
+      "0.9",
+      "0.99",
+      "0.999"
+    ],
+    "samples_per_exponent": 1000000,
+    "dtype": "float32",
+    "seeds": [
+      0
+    ],
+    "warmup": 10,
+    "timed_repeats": 30,
+    "accuracy_target_max_normalized_output_error": 1e-06,
+    "configurations": 83,
+    "passing_sampled_accuracy_target": 54,
+    "support_mismatch_total": 0,
+    "timing_platform": "NVIDIA A100-SXM4-40GB",
+    "note": "sampled empirical accuracy; not a uniform certified floating-point error bound"
+  },
+  "raw_archives": [
+    "FastLp_Phase5_A100_formal_All6_acdef3f2_20261020_200356.zip",
+    "FastLp_Phase4_A100_All6_2dec97b1_COMPLETE_20261020_165704.zip"
+  ],
+  "privacy": {
+    "scope": "synthetic experiment code/results/reproduction only",
+    "excluded": [
+      "manuscript",
+      "reviewer response",
+      "private LaTeX",
+      "reviewer reports",
+      "Overleaf materials"
+    ]
+  },
+  "method_scope": {
+    "residual_series_bisect": "residual-controlled series with bisection fallback, not original Mellin-Barnes hybrid",
+    "chebyshev_guarded": "scalar objective guard only, not a whole-inexact-FB convergence certificate"
+  }
+}
