@@ -1,0 +1,145 @@
+{
+  "generated_utc": "2026-10-21T03:21:32.829715+00:00",
+  "purpose": "Same-CPU raw MB versus comparators on identical float64 inputs",
+  "source": "arXiv:2606.31951v2, paper sign; independently reimplemented MATLAB algorithm",
+  "git_commit": "3044afd5845d4f87e8e58d4d5b9362678dbfa51a",
+  "python": "3.10.5",
+  "platform": "macOS-15.4.1-x86_64-i386-64bit",
+  "numpy": "1.26.4",
+  "scipy": "1.15.3",
+  "torch": "2.2.2",
+  "torch_threads": 1,
+  "n": 128,
+  "seed": 0,
+  "lam": 1.0,
+  "accuracy_target": 1e-06,
+  "imag_tolerance": 1e-06,
+  "warmup": 3,
+  "repeats": 9,
+  "p": [
+    0.3333333333333333,
+    0.4,
+    0.75,
+    0.9,
+    0.99,
+    0.999
+  ],
+  "input_shas": {
+    "0.33333333333333331": "0c3af870c30a5f1cba43fd6c93d13ba686aa49d679342efd2e256f398439bbea",
+    "0.40000000000000002": "2becdf5452591f77a278bdea61f20494535385669ef9db52f2a74a32da0b851c",
+    "0.75": "430ba1a29acc5ac7f070d1f46d06cee05105bb1adee34ca9c87ffa89f0e92770",
+    "0.90000000000000002": "faf5e6bcd70a5f6b7cbc6c55a44ba039de38c0c19abf954ee0369918ed591100",
+    "0.98999999999999999": "4fca71f351858d0045f02567d22160daf78448fff8168789f31301952e537418",
+    "0.999": "d0837b5e92f702a930e166040683c380d2e183142b38766bac9a659686d1bbe6"
+  },
+  "stage2_directories": [
+    "results/reviewer2_major7_mb_stage2",
+    "results/reviewer2_major7_mb_stage2_longT"
+  ],
+  "stage2_metadata": [
+    {
+      "path": "results/reviewer2_major7_mb_stage2",
+      "metadata": {
+        "generated_utc": "2026-10-21T03:11:54.133653+00:00",
+        "purpose": "raw MB contour accuracy matching (no bisection fallback)",
+        "source": "arXiv:2606.31951v2 Sec 5.2, paper-consistent sign",
+        "independent_matlab_equivalence_test": false,
+        "platform": "macOS-15.4.1-x86_64-i386-64bit",
+        "python": "3.10.5",
+        "numpy": "1.26.4",
+        "scipy": "1.15.3",
+        "p_grid": [
+          0.3333333333333333,
+          0.4,
+          0.75,
+          0.9,
+          0.99,
+          0.999
+        ],
+        "N_grid": [
+          6,
+          12,
+          24,
+          48
+        ],
+        "T_grid": [
+          60.0,
+          240.0
+        ],
+        "n": 128,
+        "lam": 1.0,
+        "seed": 0,
+        "tol": 1e-06,
+        "imag_tol": 1e-06,
+        "dt_max": 0.03,
+        "max_panels": 100000,
+        "warmup": 1,
+        "repeats": 3,
+        "input_shas": {
+          "0.33333333333333331": "0c3af870c30a5f1cba43fd6c93d13ba686aa49d679342efd2e256f398439bbea",
+          "0.40000000000000002": "2becdf5452591f77a278bdea61f20494535385669ef9db52f2a74a32da0b851c",
+          "0.75": "430ba1a29acc5ac7f070d1f46d06cee05105bb1adee34ca9c87ffa89f0e92770",
+          "0.90000000000000002": "faf5e6bcd70a5f6b7cbc6c55a44ba039de38c0c19abf954ee0369918ed591100",
+          "0.98999999999999999": "4fca71f351858d0045f02567d22160daf78448fff8168789f31301952e537418",
+          "0.999": "d0837b5e92f702a930e166040683c380d2e183142b38766bac9a659686d1bbe6"
+        },
+        "timing": "median CPU online evaluation of n inputs; MB gamma contour setup excluded",
+        "caution": "Nonvalidated trapezoid; numerical pass is not formal certification.",
+        "completed_cases": 6
+      }
+    },
+    {
+      "path": "results/reviewer2_major7_mb_stage2_longT",
+      "metadata": {
+        "generated_utc": "2026-10-21T03:12:14.360888+00:00",
+        "purpose": "raw MB contour accuracy matching (no bisection fallback)",
+        "source": "arXiv:2606.31951v2 Sec 5.2, paper-consistent sign",
+        "independent_matlab_equivalence_test": false,
+        "platform": "macOS-15.4.1-x86_64-i386-64bit",
+        "python": "3.10.5",
+        "numpy": "1.26.4",
+        "scipy": "1.15.3",
+        "p_grid": [
+          0.75,
+          0.9,
+          0.99,
+          0.999
+        ],
+        "N_grid": [
+          12,
+          24,
+          48
+        ],
+        "T_grid": [
+          960.0
+        ],
+        "n": 128,
+        "lam": 1.0,
+        "seed": 0,
+        "tol": 1e-06,
+        "imag_tol": 1e-06,
+        "dt_max": 0.03,
+        "max_panels": 100000,
+        "warmup": 1,
+        "repeats": 3,
+        "input_shas": {
+          "0.75": "430ba1a29acc5ac7f070d1f46d06cee05105bb1adee34ca9c87ffa89f0e92770",
+          "0.90000000000000002": "faf5e6bcd70a5f6b7cbc6c55a44ba039de38c0c19abf954ee0369918ed591100",
+          "0.98999999999999999": "4fca71f351858d0045f02567d22160daf78448fff8168789f31301952e537418",
+          "0.999": "d0837b5e92f702a930e166040683c380d2e183142b38766bac9a659686d1bbe6"
+        },
+        "timing": "median CPU online evaluation of n inputs; MB gamma contour setup excluded",
+        "caution": "Nonvalidated trapezoid; numerical pass is not formal certification.",
+        "completed_cases": 4
+      }
+    }
+  ],
+  "notes": [
+    "MB raw estimates and real baselines independently timed in this session",
+    "MB gamma contour setup and Chebyshev fit are offline and measured separately",
+    "The tested CPU implementations use SciPy/NumPy for raw MB/series and PyTorch for legacy baselines",
+    "MB uses source_R=False (full active domain), not source MATLAB default R restriction",
+    "Numerical test pass is not a validated floating-point certificate",
+    "Grid selection based on completed Stage-2 data, so timings are conditional on this finite grid"
+  ]
+}

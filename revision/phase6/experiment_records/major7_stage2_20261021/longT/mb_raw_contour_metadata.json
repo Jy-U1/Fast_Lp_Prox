@@ -1,0 +1,42 @@
+{
+  "generated_utc": "2026-10-21T03:12:14.360888+00:00",
+  "purpose": "raw MB contour accuracy matching (no bisection fallback)",
+  "source": "arXiv:2606.31951v2 Sec 5.2, paper-consistent sign",
+  "independent_matlab_equivalence_test": false,
+  "platform": "macOS-15.4.1-x86_64-i386-64bit",
+  "python": "3.10.5",
+  "numpy": "1.26.4",
+  "scipy": "1.15.3",
+  "p_grid": [
+    0.75,
+    0.9,
+    0.99,
+    0.999
+  ],
+  "N_grid": [
+    12,
+    24,
+    48
+  ],
+  "T_grid": [
+    960.0
+  ],
+  "n": 128,
+  "lam": 1.0,
+  "seed": 0,
+  "tol": 1e-06,
+  "imag_tol": 1e-06,
+  "dt_max": 0.03,
+  "max_panels": 100000,
+  "warmup": 1,
+  "repeats": 3,
+  "input_shas": {
+    "0.75": "430ba1a29acc5ac7f070d1f46d06cee05105bb1adee34ca9c87ffa89f0e92770",
+    "0.90000000000000002": "faf5e6bcd70a5f6b7cbc6c55a44ba039de38c0c19abf954ee0369918ed591100",
+    "0.98999999999999999": "4fca71f351858d0045f02567d22160daf78448fff8168789f31301952e537418",
+    "0.999": "d0837b5e92f702a930e166040683c380d2e183142b38766bac9a659686d1bbe6"
+  },
+  "timing": "median CPU online evaluation of n inputs; MB gamma contour setup excluded",
+  "caution": "Nonvalidated trapezoid; numerical pass is not formal certification.",
+  "completed_cases": 4
+}

@@ -1,0 +1,8 @@
+numpy>=1.24
+scipy>=1.10
+pandas>=1.5
+pytest>=7
+mpmath>=1.3
+# Stage-3 same-CPU comparisons also require torch and the editable fast_lp_prox package.
+# The recorded RNG input SHA-256s used NumPy 1.26.4; pin that version
+# to replay the optional objective-gap verification exactly.
