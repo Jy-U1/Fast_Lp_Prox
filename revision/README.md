@@ -1,3 +1,9 @@
+# Revised-paper reproduction
+
+For the current revised manuscript's numerical results, start at [PAPER_REPRODUCTION.md](PAPER_REPRODUCTION.md). This document below is a historical overview of the original scalar experiments.
+
+---
+
 # Scalar ℓp Proximity Operator: Numerical Benchmarks
 
 ## Overview

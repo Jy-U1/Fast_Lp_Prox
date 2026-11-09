@@ -1,5 +1,7 @@
 # fast-lp-prox
 
+> **Revised-paper reproduction (accuracy-matched):** See [the manuscript-to-code index](revision/PAPER_REPRODUCTION.md) and the [frozen Phase 4/5 experimental record](revision/experiment_records/phase4_phase5_20261020/). The fixed-iteration CUDA snapshots further down this README are **historical exploratory results**, not the revised paper's matched-accuracy benchmarks.
+
 `fast-lp-prox` is a research-oriented Python toolkit for fast evaluation of the nonconvex scalar and vector Lp proximal operator
 
 ```math
